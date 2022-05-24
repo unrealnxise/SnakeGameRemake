@@ -1,59 +1,44 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.ImageObserver;
 
 public class SelectGameModeWindow implements ActionListener {
-    JPanel panel;
     JFrame frame;
-    JButton mode1;
-    JButton mode2;
-    JButton mode3;
-    JButton mode4;
-    JButton mode5;
-    JButton mode6;
+    Button mode1;
+    Button mode2;
+    Button mode3;
+    Button mode4;
+    Button mode5;
+    Button mode6;
+    Button shop;
 
     SelectGameModeWindow(){
-        mode1 = new JButton();
-        mode1.setFont(new Font("Ink Free", Font.BOLD, 14));
-        mode1.setText("Classic");
-        mode1.setFocusable(false);
-        mode1.setBounds(10, 50, 120, 40);
+        shop = new Button("Shop", 135, 200, 120, 40);
+        shop.setIcon(new ImageIcon("textures/shop.png"));
+        shop.addActionListener(this);
+
+        mode1 = new Button("Classic", 10, 50, 120, 40);
+        mode1.setIcon(new ImageIcon("textures/classic.png"));
         mode1.addActionListener(this);
 
-        mode2 = new JButton();
-        mode2.setFont(new Font("Ink Free", Font.BOLD, 14));
-        mode2.setText("Portal");
-        mode2.setFocusable(false);
-        mode2.setBounds(135, 50, 120, 40);
+        mode2 = new Button("Portal", 135, 50, 120, 40);
+        mode2.setIcon(new ImageIcon("textures/skinPacks/Portal/portalA.png"));
         mode2.addActionListener(this);
 
-        mode3 = new JButton();
-        mode3.setFont(new Font("Ink Free", Font.BOLD, 14));
-        mode3.setText("Sonic");
-        mode3.setFocusable(false);
-        mode3.setBounds(260, 50, 120, 40);
+        mode3 = new Button("Sonic", 260, 50, 120, 40);
+        // Icon
         mode3.addActionListener(this);
 
-        mode4 = new JButton();
-        mode4.setFont(new Font("Ink Free", Font.BOLD, 14));
-        mode4.setText("Minecraft");
-        mode4.setFocusable(false);
-        mode4.setBounds(10, 100, 120, 40);
+        mode4 = new Button("Minecraft", 10, 100, 120, 40);
+        // Icon
         mode4.addActionListener(this);
 
-        mode5 = new JButton();
-        mode5.setFont(new Font("Ink Free", Font.BOLD, 14));
-        mode5.setText("Block Mode");
-        mode5.setFocusable(false);
-        mode5.setBounds(135, 100, 120, 40);
+        mode5 = new Button("Block Mode", 135, 100, 120, 40);
+        // Icon
         mode5.addActionListener(this);
 
-        mode6 = new JButton();
-        mode6.setFont(new Font("Ink Free", Font.BOLD, 14));
-        mode6.setText("Danger zone");
-        mode6.setFocusable(false);
-        mode6.setBounds(260, 100, 120, 40);
+        mode6 = new Button("Danger zone", 260, 100, 120, 40);
+        // Icon
         mode6.addActionListener(this);
 
         JLabel label = new JLabel();
@@ -63,7 +48,7 @@ public class SelectGameModeWindow implements ActionListener {
         label.setLayout(null);
         label.setForeground(Color.white);
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setBackground(Color.black);
         panel.add(mode1);
         panel.add(mode2);
@@ -71,11 +56,11 @@ public class SelectGameModeWindow implements ActionListener {
         panel.add(mode4);
         panel.add(mode5);
         panel.add(mode6);
+        panel.add(shop);
         panel.add(label);
         panel.setFocusable(true);
         panel.setPreferredSize(new Dimension(400, 400));
         panel.setLayout(null);
-
 
         frame = new JFrame();
         frame.add(panel);
@@ -89,13 +74,6 @@ public class SelectGameModeWindow implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
 
-    public void draw(Graphics g){
-        g.setColor(Color.white);
-        g.setFont(new Font("Ink Free", Font.BOLD, 40));
-        FontMetrics metrics = panel.getFontMetrics(g.getFont());
-        g.drawString("Select your mode", 0, 0);
-    }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mode1){
@@ -104,6 +82,13 @@ public class SelectGameModeWindow implements ActionListener {
             if(i == 0) {
                 frame.dispose();
                 new GameFrame();
+            }
+        } else if (e.getSource()==shop) {
+            int i = JOptionPane.showConfirmDialog(null, "Are u sure?", "Warning!",
+                    JOptionPane.YES_NO_OPTION);
+            if(i == 0) {
+                frame.dispose();
+                new ShopWindow();
             }
         }
     }
