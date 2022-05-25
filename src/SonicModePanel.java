@@ -12,8 +12,8 @@ public class SonicModePanel extends JPanel implements ActionListener {
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
     int DELAY = 80;
-    final int x[] = new int[GAME_UNITS];
-    final int y[] = new int[GAME_UNITS];
+    final int[] x = new int[GAME_UNITS];
+    final int[] y = new int[GAME_UNITS];
     int bodyParts = 6;
     int applesEaten;
     int appleX;
@@ -62,10 +62,6 @@ public class SonicModePanel extends JPanel implements ActionListener {
                 g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/arena.png").getImage(),
                         0, 0, null);
             }
-//            for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
-//                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
-//                g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
-//            }
 
             if (Objects.equals(Bank.selectPack, "Standard")) {
                 g.setColor(Color.red);
@@ -148,9 +144,6 @@ public class SonicModePanel extends JPanel implements ActionListener {
                 } else {
                     if (Objects.equals(Bank.selectPack, "Standard")) {
                         g.setColor(new Color(45, 180, 0));
-//                    g.setColor(new Color(random.nextInt(255),
-//                            random.nextInt(255),
-//                            random.nextInt(255)));
                         g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                     }
                     else if (Objects.equals(Bank.selectPack, "Portal")) {
@@ -166,8 +159,8 @@ public class SonicModePanel extends JPanel implements ActionListener {
                                 x[i], y[i], null);
                     }
                     else if (Objects.equals(Bank.selectPack, "Sonic")) {
-//                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/body.png").getImage(),
-//                                x[i], y[i], null);
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/body.png").getImage(),
+                                x[i], y[i], null);
                         g.setColor(Color.blue);
                         g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                     }
@@ -190,8 +183,8 @@ public class SonicModePanel extends JPanel implements ActionListener {
     }
 
     public void newApple(){
-        appleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
-        appleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
+        appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
 
         rSuperApple = random.nextInt(6);
         if(rSuperApple == 3){
@@ -200,8 +193,8 @@ public class SonicModePanel extends JPanel implements ActionListener {
     }
 
     public void newSuperApple(){
-        superAppleX = random.nextInt((int)(SCREEN_WIDTH/UNIT_SIZE))*UNIT_SIZE;
-        superAppleY = random.nextInt((int)(SCREEN_HEIGHT/UNIT_SIZE))*UNIT_SIZE;
+        superAppleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        superAppleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
     }
 
     public void move(){
@@ -237,9 +230,10 @@ public class SonicModePanel extends JPanel implements ActionListener {
 
     public void checkCollisions(){
         for (int i = bodyParts; i > 0; i--) {
-            if((x[0] == x[i]) && (y[0] == y[i])){
-                running = false;
+            if ((x[0] != x[i]) || (y[0] != y[i])) {
+                continue;
             }
+            running = false;
         }
 
         if(x[0] < 0){
@@ -268,13 +262,13 @@ public class SonicModePanel extends JPanel implements ActionListener {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("DATA/saves/save.txt"));
             bw.write(Integer.toString(Bank.money + applesEaten));
-            bw.write("\n" + Integer.toString(Bank.portalPack));
-            bw.write("\n" + Integer.toString(Bank.rickPack));
-            bw.write("\n" + Integer.toString(Bank.minePack));
-            bw.write("\n" + Integer.toString(Bank.simpPack));
-            bw.write("\n" + Integer.toString(Bank.sonicPack));
+            bw.write("\n" + Bank.portalPack);
+            bw.write("\n" + Bank.rickPack);
+            bw.write("\n" + Bank.minePack);
+            bw.write("\n" + Bank.simpPack);
+            bw.write("\n" + Bank.sonicPack);
             bw.close();
-        }catch (Exception e){}
+        }catch (Exception ignored){}
     }
 
     public void gameOver(Graphics g){

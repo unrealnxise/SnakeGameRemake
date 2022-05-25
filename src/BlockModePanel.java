@@ -1,12 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Objects;
 import java.util.Random;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class BlockModePanel extends JPanel implements ActionListener {
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
@@ -19,6 +22,34 @@ public class GamePanel extends JPanel implements ActionListener {
     int appleX;
     int appleY;
 
+    int blockX;
+    int blockY;
+
+    int blockX_1;
+    int blockY_1;
+
+    int blockX_2;
+    int blockY_2;
+
+    int blockX_3;
+    int blockY_3;
+
+    int blockX_4;
+    int blockY_4;
+
+    int blockX_5;
+    int blockY_5;
+
+    int blockX_6;
+    int blockY_6;
+
+    int blockX_7;
+    int blockY_7;
+
+    int blockX_8;
+    int blockY_8;
+
+
     int rSuperApple;
 
     int superAppleX = -1;
@@ -28,16 +59,17 @@ public class GamePanel extends JPanel implements ActionListener {
     Timer timer;
     Random random;
 
-    GamePanel(){
+    BlockModePanel(){
         random = new Random();
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setBackground(Color.black);
         setFocusable(true);
-        addKeyListener(new MyKeyAdapter());
+        addKeyListener(new BlockModePanel.MyKeyAdapter());
         startGame();
     }
 
     public void startGame(){
+        newBlock();
         newApple();
         running = true;
         timer = new Timer(DELAY, this);
@@ -108,7 +140,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 }
                 else if (Objects.equals(Bank.selectPack, "Sonic")) {
                     g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/super apple.png").getImage(),
-                                superAppleX, superAppleY, null);
+                            superAppleX, superAppleY, null);
                 }
                 else if (Objects.equals(Bank.selectPack, "Rick")) {
                     g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/superApple.png").getImage(),
@@ -124,7 +156,7 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                     else if (Objects.equals(Bank.selectPack, "Portal")) {
                         g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/head.png").getImage(),
-                            x[i], y[i], null);
+                                x[i], y[i], null);
                     }
                     else if (Objects.equals(Bank.selectPack, "Mine")) {
                         g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/head.png").getImage(),
@@ -169,6 +201,174 @@ public class GamePanel extends JPanel implements ActionListener {
                     }
                 }
             }
+            if (Objects.equals(Bank.selectPack, "Standard")) {
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX, blockY, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_1, blockY_1, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_2, blockY_2, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_3, blockY_3, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_4, blockY_4, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_5, blockY_5, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_6, blockY_6, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_7, blockY_7, UNIT_SIZE, UNIT_SIZE);
+
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillRect(blockX_8, blockY_8, UNIT_SIZE, UNIT_SIZE);
+            }
+            else if (Objects.equals(Bank.selectPack, "Portal")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX, blockY, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_1, blockY_1, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_2, blockY_2, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_3, blockY_3, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_4, blockY_4, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_5, blockY_5, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_6, blockY_6, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_7, blockY_7, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/block.png").getImage(),
+                        blockX_8, blockY_8, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Mine")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX, blockY, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_1, blockY_1, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_2, blockY_2, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_3, blockY_3, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_4, blockY_4, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_5, blockY_5, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_6, blockY_6, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_7, blockY_7, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png").getImage(),
+                        blockX_8, blockY_8, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Simp")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX, blockY, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_1, blockY_1, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_2, blockY_2, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_3, blockY_3, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_4, blockY_4, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_5, blockY_5, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_6, blockY_6, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_7, blockY_7, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/block.png").getImage(),
+                        blockX_8, blockY_8, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Sonic")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX, blockY, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_1, blockY_1, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_2, blockY_2, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_3, blockY_3, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_4, blockY_4, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_5, blockY_5, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_6, blockY_6, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_7, blockY_7, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/block.png").getImage(),
+                        blockX_8, blockY_8, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Rick")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX, blockY, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_1, blockY_1, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_2, blockY_2, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_3, blockY_3, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_4, blockY_4, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_5, blockY_5, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_6, blockY_6, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_7, blockY_7, null);
+
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/block.png").getImage(),
+                        blockX_8, blockY_8, null);
+            }
 
 
             g.setColor(Color.red);
@@ -186,11 +386,41 @@ public class GamePanel extends JPanel implements ActionListener {
     public void newApple(){
         appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
         appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
-
+        newBlock();
         rSuperApple = random.nextInt(6);
+
         if(rSuperApple == 3){
             newSuperApple();
         }
+    }
+
+    public void newBlock(){
+        blockX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_1 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_1 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_2 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_2 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_3 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_3 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_4 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_4 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_5 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_5 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_6 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_6 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_7 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_7 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        blockX_8 = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        blockY_8 = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
     }
 
     public void newSuperApple(){
@@ -217,10 +447,21 @@ public class GamePanel extends JPanel implements ActionListener {
             bodyParts++;
             applesEaten++;
             newApple();
-        } else if ((x[0] == superAppleX) && (y[0] == superAppleY)) {
+        }
+        else if ((x[0] == superAppleX) && (y[0] == superAppleY)) {
             bodyParts += 3;
             applesEaten += 3;
             newApple();
+        }
+        else if ((x[0] == blockX) && (y[0] == blockY) || (x[0] == blockX_1) && (y[0] == blockY_1) ||
+                (x[0] == blockX_2) && (y[0] == blockY_2) ||
+                (x[0] == blockX_3) && (y[0] == blockY_3) ||
+                (x[0] == blockX_4) && (y[0] == blockY_4) ||
+                (x[0] == blockX_5) && (y[0] == blockY_5) ||
+                (x[0] == blockX_6) && (y[0] == blockY_6) ||
+                (x[0] == blockX_7) && (y[0] == blockY_7) ||
+                (x[0] == blockX_8) && (y[0] == blockY_8)) {
+            running = false;
         }
     }
 
@@ -295,7 +536,7 @@ public class GamePanel extends JPanel implements ActionListener {
         repaint();
     }
 
-    public class MyKeyAdapter extends KeyAdapter{
+    public class MyKeyAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e){
             switch (e.getKeyCode()){

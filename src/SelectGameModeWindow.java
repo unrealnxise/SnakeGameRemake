@@ -43,7 +43,7 @@ public class SelectGameModeWindow implements ActionListener {
         mode5.addActionListener(this);
 
         mode6 = new Button("Danger zone", 260, 100, 120, 40);
-        mode6.setIcon(new ImageIcon("DATA/textures/smoke.png"));
+        mode6.setIcon(new ImageIcon("DATA/textures/Balon.png"));
         mode6.setFont(new Font("Ink Free", Font.BOLD, 10));
         mode6.addActionListener(this);
 
@@ -111,11 +111,16 @@ public class SelectGameModeWindow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mode1){
             new GameFrame();
-        } else if (e.getSource()==shop) {
+        }
+        else if (e.getSource()==shop) {
                 frame.dispose();
                 new ShopWindow();
-        }else if (e.getSource()==mode3) {
+        }
+        else if (e.getSource()==mode3) {
             new SonicModeFrame();
+        }
+        else if (e.getSource()==mode5) {
+            new BlockModeFrame();
         }
         if(e.getSource() == wardrobe){
             frame.dispose();
