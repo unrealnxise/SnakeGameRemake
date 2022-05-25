@@ -49,6 +49,7 @@ public class SelectGameModeWindow implements ActionListener {
 
         wardrobe = new Button("Skins", 135, 245, 120, 40);
         wardrobe.setIcon(new ImageIcon("DATA/textures/skins_icon.png"));
+        wardrobe.addActionListener(this);
 
         JLabel label = new JLabel();
         label.setFont(new Font("Ink Free", Font.BOLD, 14));
@@ -94,12 +95,6 @@ public class SelectGameModeWindow implements ActionListener {
             Bank.rickPack = Integer.parseInt(br.readLine());
             Bank.simpPack = Integer.parseInt(br.readLine());
             Bank.sonicPack = Integer.parseInt(br.readLine());
-            System.out.println("Money " + Bank.money);
-            System.out.println("Portal " + Bank.portalPack);
-            System.out.println("Rick " + Bank.rickPack);
-            System.out.println("Mine " + Bank.minePack);
-            System.out.println("Simp " + Bank.simpPack);
-            System.out.println("Sonic " + Bank.sonicPack);
             br.close();
         }
         catch (Exception e){
@@ -121,6 +116,10 @@ public class SelectGameModeWindow implements ActionListener {
                 new ShopWindow();
         }else if (e.getSource()==mode3) {
             new SonicModeFrame();
+        }
+        if(e.getSource() == wardrobe){
+            frame.dispose();
+            new SkinsFrame();
         }
     }
 }

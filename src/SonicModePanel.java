@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.Objects;
 import java.util.Random;
 
 public class SonicModePanel extends JPanel implements ActionListener {
@@ -49,28 +50,131 @@ public class SonicModePanel extends JPanel implements ActionListener {
 
     public void draw(Graphics g){
         if (running) {
+            if(Objects.equals(Bank.selectPack, "Sonic")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/arena.png").getImage(),
+                        0, 0, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Simp")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/arena.png").getImage(),
+                        0, 0, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Mine")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/arena.png").getImage(),
+                        0, 0, null);
+            }
 //            for (int i = 0; i < SCREEN_HEIGHT / UNIT_SIZE; i++) {
 //                g.drawLine(i * UNIT_SIZE, 0, i * UNIT_SIZE, SCREEN_HEIGHT);
 //                g.drawLine(0, i * UNIT_SIZE, SCREEN_WIDTH, i * UNIT_SIZE);
 //            }
-            g.setColor(Color.red);
-            g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+
+            if (Objects.equals(Bank.selectPack, "Standard")) {
+                g.setColor(Color.red);
+                g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
+            }
+            else if (Objects.equals(Bank.selectPack, "Portal")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/apple.png").getImage(),
+                        appleX, appleY, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Mine")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/apple.png").getImage(),
+                        appleX, appleY, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Simp")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/apple.png").getImage(),
+                        appleX, appleY, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Sonic")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/apple.png").getImage(),
+                        appleX, appleY, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Rick")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/apple.png").getImage(),
+                        appleX, appleY, null);
+            }
 
             if(rSuperApple == 3) {
-                g.setColor(Color.pink);
-                g.fillOval(superAppleX, superAppleY, UNIT_SIZE, UNIT_SIZE);
+                if (Objects.equals(Bank.selectPack, "Standard")) {
+                    g.setColor(Color.yellow);
+                    g.fillOval(superAppleX, superAppleY, UNIT_SIZE, UNIT_SIZE);
+                }
+                else if (Objects.equals(Bank.selectPack, "Portal")) {
+                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/superApple.png").getImage(),
+                            superAppleX, superAppleY, null);
+                }
+                else if (Objects.equals(Bank.selectPack, "Mine")) {
+                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/superApple.png").getImage(),
+                            superAppleX, superAppleY, null);
+                }
+                else if (Objects.equals(Bank.selectPack, "Simp")) {
+                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/superApple.png").getImage(),
+                            superAppleX, superAppleY, null);
+                }
+                else if (Objects.equals(Bank.selectPack, "Sonic")) {
+                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/super apple.png").getImage(),
+                            superAppleX, superAppleY, null);
+                }
+                else if (Objects.equals(Bank.selectPack, "Rick")) {
+                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/superApple.png").getImage(),
+                            superAppleX, superAppleY, null);
+                }
             }
 
             for (int i = 0; i < bodyParts; i++) {
                 if (i == 0) {
-                    g.setColor(Color.green);
-                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    if (Objects.equals(Bank.selectPack, "Standard")) {
+                        g.setColor(Color.green);
+                        g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Portal")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/head.png").getImage(),
+                                x[i], y[i], null);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Mine")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/head.png").getImage(),
+                                x[i], y[i], null);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Simp")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/head.png").getImage(),
+                                x[i], y[i], null);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Sonic")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/head.png").getImage(),
+                                x[i], y[i], null);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Rick")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/head.png").getImage(),
+                                x[i], y[i], null);
+                    }
                 } else {
-                    g.setColor(new Color(45, 180, 0));
+                    if (Objects.equals(Bank.selectPack, "Standard")) {
+                        g.setColor(new Color(45, 180, 0));
 //                    g.setColor(new Color(random.nextInt(255),
 //                            random.nextInt(255),
 //                            random.nextInt(255)));
-                    g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                        g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Portal")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/body.png").getImage(),
+                                x[i], y[i], null);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Mine")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/body.png").getImage(),
+                                x[i], y[i], null);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Simp")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/body.png").getImage(),
+                                x[i], y[i], null);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Sonic")) {
+//                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/body.png").getImage(),
+//                                x[i], y[i], null);
+                        g.setColor(Color.blue);
+                        g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
+                    }
+                    else if (Objects.equals(Bank.selectPack, "Rick")) {
+                        g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/body.png").getImage(),
+                                x[i], y[i], null);
+                    }
                 }
             }
             g.setColor(Color.red);
@@ -164,6 +268,11 @@ public class SonicModePanel extends JPanel implements ActionListener {
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter("DATA/saves/save.txt"));
             bw.write(Integer.toString(Bank.money + applesEaten));
+            bw.write("\n" + Integer.toString(Bank.portalPack));
+            bw.write("\n" + Integer.toString(Bank.rickPack));
+            bw.write("\n" + Integer.toString(Bank.minePack));
+            bw.write("\n" + Integer.toString(Bank.simpPack));
+            bw.write("\n" + Integer.toString(Bank.sonicPack));
             bw.close();
         }catch (Exception e){}
     }

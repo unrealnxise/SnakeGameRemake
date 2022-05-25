@@ -5,4 +5,5 @@ public class Bank {
     public static int rickPack;
     public static int simpPack;
     public static int sonicPack;
+    public static String selectPack = "Standard";
 }
