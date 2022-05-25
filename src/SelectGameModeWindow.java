@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class SelectGameModeWindow implements ActionListener {
     JFrame frame;
@@ -13,7 +14,7 @@ public class SelectGameModeWindow implements ActionListener {
     Button shop;
 
     SelectGameModeWindow(){
-        new Bank();
+        loadData();
         shop = new Button("Shop", 135, 200, 120, 40);
         shop.setIcon(new ImageIcon("DATA/textures/shop.png"));
         shop.addActionListener(this);
@@ -77,6 +78,18 @@ public class SelectGameModeWindow implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
 
+    public void loadData(){
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("DATA/saves/save.txt"));
+            Bank.money = Integer.parseInt(br.readLine());
+            System.out.println(Bank.money);
+            br.close();
+        }
+        catch (Exception e){
+            Bank.money = 0;
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mode1){
@@ -87,12 +100,8 @@ public class SelectGameModeWindow implements ActionListener {
                 new GameFrame();
             }
         } else if (e.getSource()==shop) {
-            int i = JOptionPane.showConfirmDialog(null, "Are u sure?", "Warning!",
-                    JOptionPane.YES_NO_OPTION);
-            if(i == 0) {
                 frame.dispose();
                 new ShopWindow();
-            }
         }else if (e.getSource()==mode3) {
             int i = JOptionPane.showConfirmDialog(null, "Are u sure?", "Warning!",
                     JOptionPane.YES_NO_OPTION);

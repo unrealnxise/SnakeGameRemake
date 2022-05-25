@@ -1,10 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ShopWindow{
+public class ShopWindow implements ActionListener {
     JFrame frame;
     Button portalPack;
     Button minePack;
+
+    Button back;
 
     ShopWindow(){
         portalPack = new Button("500$", 0, 50, 150, 150);
@@ -24,6 +28,10 @@ public class ShopWindow{
         minePack.setBorder(BorderFactory.createCompoundBorder());
         minePack.setIconTextGap(10);
         minePack.setIcon(new ImageIcon("DATA/textures/skinPacks/Minecraft/iconPack.png"));
+
+        back = new Button("Back", 15, 300, 120, 40);
+        back.setIcon(new ImageIcon("DATA/textures/classic.png"));
+        back.addActionListener(this);
 
         JLabel label = new JLabel();
         label.setFont(new Font("Ink Free", Font.BOLD, 14));
@@ -45,6 +53,7 @@ public class ShopWindow{
         panel.add(label1);
         panel.add(portalPack);
         panel.add(minePack);
+        panel.add(back);
         panel.setFocusable(true);
         panel.setPreferredSize(new Dimension(450, 400));
         panel.setLayout(null);
@@ -60,5 +69,13 @@ public class ShopWindow{
         frame.setVisible(true);
         frame.setLayout(null);
         frame.setLocationRelativeTo(null);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == back){
+            frame.dispose();
+            new SelectGameModeWindow();
+        }
     }
 }

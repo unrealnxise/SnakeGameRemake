@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener {
@@ -154,7 +156,16 @@ public class GamePanel extends JPanel implements ActionListener {
 
     }
 
+    public void saveData(){
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("DATA/saves/save.txt"));
+            bw.write(Integer.toString(Bank.money + applesEaten));
+            bw.close();
+        }catch (Exception e){}
+    }
+
     public void gameOver(Graphics g){
+        saveData();
         g.setColor(Color.red);
         g.setFont(new Font("Ink Free", Font.BOLD, 40));
         FontMetrics metrics1 = getFontMetrics(g.getFont());
