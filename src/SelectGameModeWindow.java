@@ -30,7 +30,8 @@ public class SelectGameModeWindow implements ActionListener {
         mode3.addActionListener(this);
 
         mode4 = new Button("Minecraft", 10, 100, 120, 40);
-        // Icon
+        mode4.setFont(new Font("Ink Free", Font.BOLD, 12));
+        mode4.setIcon(new ImageIcon("textures/skinPacks/Minecraft/head.png"));
         mode4.addActionListener(this);
 
         mode5 = new Button("Block Mode", 135, 100, 120, 40);
@@ -63,6 +64,7 @@ public class SelectGameModeWindow implements ActionListener {
         panel.setLayout(null);
 
         frame = new JFrame();
+        frame.setIconImage(new ImageIcon("textures/classic.png").getImage());
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
