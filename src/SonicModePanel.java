@@ -3,12 +3,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
-public class GamePanel extends JPanel implements ActionListener {
+public class SonicModePanel extends JPanel implements ActionListener {
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
-    static final int DELAY = 75;
+    int DELAY = 80;
     final int x[] = new int[GAME_UNITS];
     final int y[] = new int[GAME_UNITS];
     int bodyParts = 6;
@@ -24,13 +24,12 @@ public class GamePanel extends JPanel implements ActionListener {
     boolean running = false;
     Timer timer;
     Random random;
-
-    GamePanel(){
+    SonicModePanel(){
         random = new Random();
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setBackground(Color.black);
         setFocusable(true);
-        addKeyListener(new MyKeyAdapter());
+        addKeyListener(new SonicModePanel.MyKeyAdapter());
         startGame();
     }
 
@@ -56,7 +55,7 @@ public class GamePanel extends JPanel implements ActionListener {
             g.fillOval(appleX, appleY, UNIT_SIZE, UNIT_SIZE);
 
             if(rSuperApple == 3) {
-                g.setColor(Color.yellow);
+                g.setColor(Color.pink);
                 g.fillOval(superAppleX, superAppleY, UNIT_SIZE, UNIT_SIZE);
             }
 
@@ -115,10 +114,15 @@ public class GamePanel extends JPanel implements ActionListener {
 
     public void checkApple(){
         if((x[0] == appleX) && (y[0] == appleY)){
+            DELAY = DELAY - 5;
+            timer.setDelay(DELAY);
             bodyParts++;
             applesEaten++;
             newApple();
         } else if ((x[0] == superAppleX) && (y[0] == superAppleY)) {
+            DELAY = DELAY + 10;
+            timer.setDelay(DELAY);
+
             bodyParts += 3;
             applesEaten += 3;
             newApple();

@@ -13,16 +13,17 @@ public class SelectGameModeWindow implements ActionListener {
     Button shop;
 
     SelectGameModeWindow(){
+        new Bank();
         shop = new Button("Shop", 135, 200, 120, 40);
-        shop.setIcon(new ImageIcon("textures/shop.png"));
+        shop.setIcon(new ImageIcon("DATA/textures/shop.png"));
         shop.addActionListener(this);
 
         mode1 = new Button("Classic", 10, 50, 120, 40);
-        mode1.setIcon(new ImageIcon("textures/classic.png"));
+        mode1.setIcon(new ImageIcon("DATA/textures/classic.png"));
         mode1.addActionListener(this);
 
         mode2 = new Button("Portal", 135, 50, 120, 40);
-        mode2.setIcon(new ImageIcon("textures/skinPacks/Portal/portalA.png"));
+        mode2.setIcon(new ImageIcon("DATA/textures/skinPacks/Portal/portalA.png"));
         mode2.addActionListener(this);
 
         mode3 = new Button("Sonic", 260, 50, 120, 40);
@@ -31,7 +32,7 @@ public class SelectGameModeWindow implements ActionListener {
 
         mode4 = new Button("Minecraft", 10, 100, 120, 40);
         mode4.setFont(new Font("Ink Free", Font.BOLD, 12));
-        mode4.setIcon(new ImageIcon("textures/skinPacks/Minecraft/head.png"));
+        mode4.setIcon(new ImageIcon("DATA/textures/skinPacks/Minecraft/head.png"));
         mode4.addActionListener(this);
 
         mode5 = new Button("Block Mode", 135, 100, 120, 40);
@@ -64,7 +65,7 @@ public class SelectGameModeWindow implements ActionListener {
         panel.setLayout(null);
 
         frame = new JFrame();
-        frame.setIconImage(new ImageIcon("textures/classic.png").getImage());
+        frame.setIconImage(new ImageIcon("DATA/textures/classic.png").getImage());
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
@@ -91,6 +92,13 @@ public class SelectGameModeWindow implements ActionListener {
             if(i == 0) {
                 frame.dispose();
                 new ShopWindow();
+            }
+        }else if (e.getSource()==mode3) {
+            int i = JOptionPane.showConfirmDialog(null, "Are u sure?", "Warning!",
+                    JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                frame.dispose();
+                new SonicModeFrame();
             }
         }
     }

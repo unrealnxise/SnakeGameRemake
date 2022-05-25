@@ -14,7 +14,7 @@ public class ShopWindow{
         portalPack.setVerticalTextPosition(JButton.BOTTOM);
         portalPack.setBorder(BorderFactory.createCompoundBorder());
         portalPack.setIconTextGap(10);
-        portalPack.setIcon(new ImageIcon("textures/skinPacks/Portal/iconPack.png"));
+        portalPack.setIcon(new ImageIcon("DATA/textures/skinPacks/Portal/iconPack.png"));
 
         minePack = new Button("200$", 150, 50, 150, 150);
         minePack.setForeground(Color.white);
@@ -23,7 +23,7 @@ public class ShopWindow{
         minePack.setVerticalTextPosition(JButton.BOTTOM);
         minePack.setBorder(BorderFactory.createCompoundBorder());
         minePack.setIconTextGap(10);
-        minePack.setIcon(new ImageIcon("textures/skinPacks/Minecraft/iconPack.png"));
+        minePack.setIcon(new ImageIcon("DATA/textures/skinPacks/Minecraft/iconPack.png"));
 
         JLabel label = new JLabel();
         label.setFont(new Font("Ink Free", Font.BOLD, 14));
@@ -32,17 +32,25 @@ public class ShopWindow{
         label.setLayout(null);
         label.setForeground(Color.white);
 
+        JLabel label1 = new JLabel();
+        label1.setFont(new Font("Ink Free", Font.BOLD, 14));
+        label1.setText("Money: " + Bank.money);
+        label1.setBounds(340, 320, 120, 40);
+        label1.setLayout(null);
+        label1.setForeground(Color.white);
+
         JPanel panel = new JPanel();
         panel.setBackground(Color.black);
         panel.add(label);
+        panel.add(label1);
         panel.add(portalPack);
         panel.add(minePack);
         panel.setFocusable(true);
-        panel.setPreferredSize(new Dimension(400, 400));
+        panel.setPreferredSize(new Dimension(450, 400));
         panel.setLayout(null);
 
         frame = new JFrame();
-        frame.setIconImage(new ImageIcon("textures/shop.png").getImage());
+        frame.setIconImage(new ImageIcon("DATA/textures/shop.png").getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.add(panel);

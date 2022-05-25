@@ -1,10 +1,10 @@
 import javax.swing.*;
 
-public class GameFrame extends JFrame {
-    GameFrame(){
-        add(new GamePanel());
+public class SonicModeFrame extends JFrame{
+    SonicModeFrame(){
+        add(new SonicModePanel());
         setIconImage(new ImageIcon("DATA/textures/classic.png").getImage());
-        setTitle("Snake");
+        setTitle("Sonic Mode");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         pack();
