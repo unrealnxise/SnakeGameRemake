@@ -34,7 +34,7 @@ public class SelectGameModeWindow implements ActionListener {
 
         mode4 = new Button("Minecraft", 10, 100, 120, 40);
         mode4.setFont(new Font("Ink Free", Font.BOLD, 12));
-        mode4.setIcon(new ImageIcon("DATA/textures/skinPacks/Minecraft/head.png"));
+        mode4.setIcon(new ImageIcon("DATA/textures/pickaxe.png"));
         mode4.addActionListener(this);
 
         mode5 = new Button("Block Mode", 135, 100, 120, 40);
@@ -90,13 +90,25 @@ public class SelectGameModeWindow implements ActionListener {
             BufferedReader br = new BufferedReader(new FileReader("DATA/saves/save.txt"));
             Bank.money = Integer.parseInt(br.readLine());
             Bank.portalPack = Integer.parseInt(br.readLine());
-            System.out.println(Bank.money);
-            System.out.println(Bank.portalPack);
+            Bank.minePack = Integer.parseInt(br.readLine());
+            Bank.rickPack = Integer.parseInt(br.readLine());
+            Bank.simpPack = Integer.parseInt(br.readLine());
+            Bank.sonicPack = Integer.parseInt(br.readLine());
+            System.out.println("Money " + Bank.money);
+            System.out.println("Portal " + Bank.portalPack);
+            System.out.println("Rick " + Bank.rickPack);
+            System.out.println("Mine " + Bank.minePack);
+            System.out.println("Simp " + Bank.simpPack);
+            System.out.println("Sonic " + Bank.sonicPack);
             br.close();
         }
         catch (Exception e){
             Bank.money = 0;
             Bank.portalPack = 0;
+            Bank.minePack = 0;
+            Bank.rickPack = 0;
+            Bank.simpPack = 0;
+            Bank.sonicPack = 0;
         }
     }
 
