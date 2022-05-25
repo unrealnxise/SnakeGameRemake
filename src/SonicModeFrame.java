@@ -5,7 +5,7 @@ public class SonicModeFrame extends JFrame{
         add(new SonicModePanel());
         setIconImage(new ImageIcon("DATA/textures/classic.png").getImage());
         setTitle("Sonic Mode");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         pack();
         setVisible(true);

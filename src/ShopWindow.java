@@ -2,13 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class ShopWindow implements ActionListener {
     JFrame frame;
     Button portalPack;
     Button minePack;
-
     Button back;
+
+    JLabel label1;
 
     ShopWindow(){
         portalPack = new Button("500$", 0, 50, 150, 150);
@@ -19,6 +22,10 @@ public class ShopWindow implements ActionListener {
         portalPack.setBorder(BorderFactory.createCompoundBorder());
         portalPack.setIconTextGap(10);
         portalPack.setIcon(new ImageIcon("DATA/textures/skinPacks/Portal/iconPack.png"));
+        portalPack.addActionListener(this);
+        if (Bank.portalPack == 1){
+            portalPack.setEnabled(false);
+        }
 
         minePack = new Button("200$", 150, 50, 150, 150);
         minePack.setForeground(Color.white);
@@ -28,6 +35,7 @@ public class ShopWindow implements ActionListener {
         minePack.setBorder(BorderFactory.createCompoundBorder());
         minePack.setIconTextGap(10);
         minePack.setIcon(new ImageIcon("DATA/textures/skinPacks/Minecraft/iconPack.png"));
+        minePack.addActionListener(this);
 
         back = new Button("Back", 15, 300, 120, 40);
         back.setIcon(new ImageIcon("DATA/textures/classic.png"));
@@ -40,7 +48,7 @@ public class ShopWindow implements ActionListener {
         label.setLayout(null);
         label.setForeground(Color.white);
 
-        JLabel label1 = new JLabel();
+        label1 = new JLabel();
         label1.setFont(new Font("Ink Free", Font.BOLD, 14));
         label1.setText("Money: " + Bank.money);
         label1.setBounds(340, 320, 120, 40);
@@ -71,11 +79,33 @@ public class ShopWindow implements ActionListener {
         frame.setLocationRelativeTo(null);
     }
 
+    public void saveData(){
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter("DATA/saves/save.txt"));
+            bw.write(Integer.toString(Bank.money));
+            bw.write("\n" + Integer.toString(Bank.portalPack));
+            bw.close();
+        }catch (Exception e){}
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == back){
             frame.dispose();
             new SelectGameModeWindow();
+        }
+        if(e.getSource() == portalPack){
+            if(Bank.money >= 500){
+                Bank.money = Bank.money - 500;
+                Bank.portalPack = 1;
+                System.out.println(Bank.money);
+                System.out.println(Bank.portalPack);
+                saveData();
+                label1.setText("Money: " + Bank.money);
+            }else {
+                JOptionPane.showMessageDialog(null, "you don't have enough money",
+                        "Warning!", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }
 }

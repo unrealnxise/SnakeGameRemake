@@ -5,7 +5,7 @@ public class GameFrame extends JFrame {
         add(new GamePanel());
         setIconImage(new ImageIcon("DATA/textures/classic.png").getImage());
         setTitle("Snake");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
         pack();
         setVisible(true);

@@ -12,6 +12,7 @@ public class SelectGameModeWindow implements ActionListener {
     Button mode5;
     Button mode6;
     Button shop;
+    Button wardrobe;
 
     SelectGameModeWindow(){
         loadData();
@@ -28,7 +29,7 @@ public class SelectGameModeWindow implements ActionListener {
         mode2.addActionListener(this);
 
         mode3 = new Button("Sonic", 260, 50, 120, 40);
-        // Icon
+        mode3.setIcon(new ImageIcon("DATA/textures/sonic.png"));
         mode3.addActionListener(this);
 
         mode4 = new Button("Minecraft", 10, 100, 120, 40);
@@ -37,12 +38,17 @@ public class SelectGameModeWindow implements ActionListener {
         mode4.addActionListener(this);
 
         mode5 = new Button("Block Mode", 135, 100, 120, 40);
-        // Icon
+        mode5.setIcon(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png"));
+        mode5.setFont(new Font("Ink Free", Font.BOLD, 10));
         mode5.addActionListener(this);
 
         mode6 = new Button("Danger zone", 260, 100, 120, 40);
-        // Icon
+        mode6.setIcon(new ImageIcon("DATA/textures/smoke.png"));
+        mode6.setFont(new Font("Ink Free", Font.BOLD, 10));
         mode6.addActionListener(this);
+
+        wardrobe = new Button("Skins", 135, 245, 120, 40);
+        wardrobe.setIcon(new ImageIcon("DATA/textures/skins_icon.png"));
 
         JLabel label = new JLabel();
         label.setFont(new Font("Ink Free", Font.BOLD, 14));
@@ -60,6 +66,7 @@ public class SelectGameModeWindow implements ActionListener {
         panel.add(mode5);
         panel.add(mode6);
         panel.add(shop);
+        panel.add(wardrobe);
         panel.add(label);
         panel.setFocusable(true);
         panel.setPreferredSize(new Dimension(400, 400));
@@ -82,33 +89,26 @@ public class SelectGameModeWindow implements ActionListener {
         try{
             BufferedReader br = new BufferedReader(new FileReader("DATA/saves/save.txt"));
             Bank.money = Integer.parseInt(br.readLine());
+            Bank.portalPack = Integer.parseInt(br.readLine());
             System.out.println(Bank.money);
+            System.out.println(Bank.portalPack);
             br.close();
         }
         catch (Exception e){
             Bank.money = 0;
+            Bank.portalPack = 0;
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==mode1){
-            int i = JOptionPane.showConfirmDialog(null, "Are u sure?", "Warning!",
-                    JOptionPane.YES_NO_OPTION);
-            if(i == 0) {
-                frame.dispose();
-                new GameFrame();
-            }
+            new GameFrame();
         } else if (e.getSource()==shop) {
                 frame.dispose();
                 new ShopWindow();
         }else if (e.getSource()==mode3) {
-            int i = JOptionPane.showConfirmDialog(null, "Are u sure?", "Warning!",
-                    JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                frame.dispose();
-                new SonicModeFrame();
-            }
+            new SonicModeFrame();
         }
     }
 }
