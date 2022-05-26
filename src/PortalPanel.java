@@ -1,17 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.Objects;
 import java.util.Random;
 
-public class SonicModePanel extends JPanel implements ActionListener {
+public class PortalPanel extends JPanel implements ActionListener {
     static final int SCREEN_WIDTH = 600;
     static final int SCREEN_HEIGHT = 600;
     static final int UNIT_SIZE = 25;
     static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/UNIT_SIZE;
-    int DELAY = 80;
+    static final int DELAY = 75;
     final int[] x = new int[GAME_UNITS];
     final int[] y = new int[GAME_UNITS];
     int bodyParts = 6;
@@ -19,20 +22,23 @@ public class SonicModePanel extends JPanel implements ActionListener {
     int appleX;
     int appleY;
 
-    int rSuperApple;
+    int portalA_X;
+    int portalA_Y;
 
-    int superAppleX = -1;
-    int superAppleY = -1;
+    int portalB_X;
+    int portalB_Y;
+
     char direction = 'R';
     boolean running = false;
     Timer timer;
     Random random;
-    SonicModePanel(){
+
+    PortalPanel(){
         random = new Random();
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));
         setBackground(Color.black);
         setFocusable(true);
-        addKeyListener(new SonicModePanel.MyKeyAdapter());
+        addKeyListener(new PortalPanel.MyKeyAdapter());
         startGame();
     }
 
@@ -88,31 +94,24 @@ public class SonicModePanel extends JPanel implements ActionListener {
                         appleX, appleY, null);
             }
 
-            if(rSuperApple == 3) {
-                if (Objects.equals(Bank.selectPack, "Standard")) {
-                    g.setColor(Color.yellow);
-                    g.fillOval(superAppleX, superAppleY, UNIT_SIZE, UNIT_SIZE);
-                }
-                else if (Objects.equals(Bank.selectPack, "Portal")) {
-                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/superApple.png").getImage(),
-                            superAppleX, superAppleY, null);
-                }
-                else if (Objects.equals(Bank.selectPack, "Mine")) {
-                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Minecraft/superApple.png").getImage(),
-                            superAppleX, superAppleY, null);
-                }
-                else if (Objects.equals(Bank.selectPack, "Simp")) {
-                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Simpsons/superApple.png").getImage(),
-                            superAppleX, superAppleY, null);
-                }
-                else if (Objects.equals(Bank.selectPack, "Sonic")) {
-                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/super apple.png").getImage(),
-                            superAppleX, superAppleY, null);
-                }
-                else if (Objects.equals(Bank.selectPack, "Rick")) {
-                    g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/superApple.png").getImage(),
-                            superAppleX, superAppleY, null);
-                }
+            if (Objects.equals(Bank.selectPack, "Portal")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/portalA.png").getImage(),
+                        portalA_X, portalA_Y, null);
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/portalB.png").getImage(),
+                        portalB_X, portalB_Y, null);
+            }
+            else if (Objects.equals(Bank.selectPack, "Rick")) {
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/portal.png").getImage(),
+                        portalA_X, portalA_Y, null);
+                g.drawImage(new ImageIcon("DATA/textures/skinPacks/Portal/portal.png").getImage(),
+                        portalB_X, portalB_Y, null);
+            }
+            else{
+                g.setColor(Color.blue);
+                g.fillOval(portalA_X, portalA_Y, 30, 30);
+
+                g.setColor(Color.orange);
+                g.fillOval(portalB_X, portalB_Y, 30, 30);
             }
 
             for (int i = 0; i < bodyParts; i++) {
@@ -161,8 +160,6 @@ public class SonicModePanel extends JPanel implements ActionListener {
                     else if (Objects.equals(Bank.selectPack, "Sonic")) {
                         g.drawImage(new ImageIcon("DATA/textures/skinPacks/Sonic/body.png").getImage(),
                                 x[i], y[i], null);
-                        g.setColor(Color.blue);
-                        g.fillRect(x[i], y[i], UNIT_SIZE, UNIT_SIZE);
                     }
                     else if (Objects.equals(Bank.selectPack, "Rick")) {
                         g.drawImage(new ImageIcon("DATA/textures/skinPacks/RickAndMorty/body.png").getImage(),
@@ -170,6 +167,8 @@ public class SonicModePanel extends JPanel implements ActionListener {
                     }
                 }
             }
+
+
             g.setColor(Color.red);
             g.setFont(new Font("Ink Free", Font.BOLD, 40));
             FontMetrics metrics = getFontMetrics(g.getFont());
@@ -185,16 +184,15 @@ public class SonicModePanel extends JPanel implements ActionListener {
     public void newApple(){
         appleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
         appleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
-
-        rSuperApple = random.nextInt(6);
-        if(rSuperApple == 3){
-            newSuperApple();
-        }
+        newSuperApple();
     }
 
     public void newSuperApple(){
-        superAppleX = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
-        superAppleY = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+        portalA_X = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        portalA_Y = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
+
+        portalB_X = random.nextInt(SCREEN_WIDTH/UNIT_SIZE)*UNIT_SIZE;
+        portalB_Y = random.nextInt(SCREEN_HEIGHT/UNIT_SIZE)*UNIT_SIZE;
     }
 
     public void move(){
@@ -213,27 +211,24 @@ public class SonicModePanel extends JPanel implements ActionListener {
 
     public void checkApple(){
         if((x[0] == appleX) && (y[0] == appleY)){
-            DELAY = DELAY - 5;
-            timer.setDelay(DELAY);
             bodyParts++;
             applesEaten++;
             newApple();
-        } else if ((x[0] == superAppleX) && (y[0] == superAppleY)) {
-            DELAY = DELAY + 10;
-            timer.setDelay(DELAY);
-
-            bodyParts += 3;
-            applesEaten += 3;
-            newApple();
+        } else if ((x[0] == portalA_X) && (y[0] == portalA_Y)) {
+            x[0] = portalB_X;
+            y[0] = portalB_Y;
+        } else if ((x[0] == portalB_X) && (y[0] == portalB_Y)) {
+            x[0] = portalA_X;
+            y[0] = portalA_Y;
         }
     }
 
     public void checkCollisions(){
         for (int i = bodyParts; i > 0; i--) {
-            if ((x[0] != x[i]) || (y[0] != y[i])) {
-                continue;
+            if ((x[0] == x[i]) && (y[0] == y[i])) {
+                running = false;
+                break;
             }
-            running = false;
         }
 
         if(x[0] < 0){
@@ -299,7 +294,7 @@ public class SonicModePanel extends JPanel implements ActionListener {
         repaint();
     }
 
-    public class MyKeyAdapter extends KeyAdapter{
+    public class MyKeyAdapter extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e){
             switch (e.getKeyCode()){

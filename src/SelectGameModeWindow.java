@@ -32,20 +32,15 @@ public class SelectGameModeWindow implements ActionListener {
         mode3.setIcon(new ImageIcon("DATA/textures/sonic.png"));
         mode3.addActionListener(this);
 
-        mode4 = new Button("Minecraft", 10, 100, 120, 40);
+        mode4 = new Button("Minecraft", 70, 100, 120, 40);
         mode4.setFont(new Font("Ink Free", Font.BOLD, 12));
         mode4.setIcon(new ImageIcon("DATA/textures/pickaxe.png"));
         mode4.addActionListener(this);
 
-        mode5 = new Button("Block Mode", 135, 100, 120, 40);
+        mode5 = new Button("Block Mode", 200, 100, 120, 40);
         mode5.setIcon(new ImageIcon("DATA/textures/skinPacks/Minecraft/block.png"));
         mode5.setFont(new Font("Ink Free", Font.BOLD, 10));
         mode5.addActionListener(this);
-
-        mode6 = new Button("Danger zone", 260, 100, 120, 40);
-        mode6.setIcon(new ImageIcon("DATA/textures/Balon.png"));
-        mode6.setFont(new Font("Ink Free", Font.BOLD, 10));
-        mode6.addActionListener(this);
 
         wardrobe = new Button("Skins", 135, 245, 120, 40);
         wardrobe.setIcon(new ImageIcon("DATA/textures/skins_icon.png"));
@@ -65,7 +60,6 @@ public class SelectGameModeWindow implements ActionListener {
         panel.add(mode3);
         panel.add(mode4);
         panel.add(mode5);
-        panel.add(mode6);
         panel.add(shop);
         panel.add(wardrobe);
         panel.add(label);
@@ -116,8 +110,14 @@ public class SelectGameModeWindow implements ActionListener {
                 frame.dispose();
                 new ShopWindow();
         }
+        else if (e.getSource()==mode2) {
+            new PortalFrame();
+        }
         else if (e.getSource()==mode3) {
             new SonicModeFrame();
+        }
+        else if (e.getSource()==mode4) {
+            new MineFrame();
         }
         else if (e.getSource()==mode5) {
             new BlockModeFrame();
